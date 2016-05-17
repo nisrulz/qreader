@@ -140,14 +140,9 @@ public class QREader {
 
   private SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
     @Override public void surfaceCreated(SurfaceHolder surfaceHolder) {
-      startCameraView(context, cameraSource, surfaceView);
-    }
-
-    @Override public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
       if (barcodeDetector.isOperational()) {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
           @Override public void release() {
-
           }
 
           @Override public void receiveDetections(Detector.Detections<Barcode> detections) {
@@ -158,12 +153,19 @@ public class QREader {
           }
         });
       }
+
+      startCameraView(context, cameraSource, surfaceView);
+    }
+
+    @Override public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
     }
 
     @Override public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
 
     }
   };
+
 
   private void startCameraView(Context context, CameraSource cameraSource,
       SurfaceView surfaceView) {
