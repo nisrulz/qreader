@@ -18,5 +18,6 @@ package github.nisrulz.qreader;
 
 public interface QRDataListener {
 
+    // Called from not main thread. Be careful
     void onDetected(final String data);
 }

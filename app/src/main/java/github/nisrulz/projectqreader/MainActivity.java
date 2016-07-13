@@ -17,56 +17,90 @@
 package github.nisrulz.projectqreader;
 
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.TextView;
 import github.nisrulz.qreader.QRDataListener;
 import github.nisrulz.qreader.QREader;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements QRDataListener {
   private SurfaceView surfaceView;
-  private TextView textView_qrcode_info;
-  QREader qrEader;
+  private TextView text;
+  private Button stateBtn;
+  private QREader qrEader;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
     surfaceView = (SurfaceView) findViewById(R.id.camera_view);
-    textView_qrcode_info = (TextView) findViewById(R.id.code_info);
+    text = (TextView) findViewById(R.id.code_info);
+    stateBtn = (Button) findViewById(R.id.state_btn);
 
-    qrEader = new QREader.Builder(this, surfaceView, new QRDataListener() {
-      @Override public void onDetected(final String data) {
-        Log.d("QREader", "Value : " + data);
-        textView_qrcode_info.post(new Runnable() {
-          @Override public void run() {
-            textView_qrcode_info.setText(data);
-          }
-        });
+    surfaceView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+      @Override public void onGlobalLayout() {
+        //to get surfaceView size
+        initAndStartQrReader(surfaceView.getWidth(), surfaceView.getHeight());
+        surfaceView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
       }
-    }).facing(QREader.BACK_CAM)
-        .enableAutofocus(true)
-        .height(800)
-        .width(800)
-        .build();
-
-    qrEader.init();
+    });
   }
 
-  @Override protected void onStart() {
-    super.onStart();
-
-    // Call in onStart
+  private void initAndStartQrReader(int previewWidth, int previewHeight) {
+    qrEader = new QREader.Builder(MainActivity.this, surfaceView, MainActivity.this)
+        .facing(QREader.BACK_CAM)
+        .enableAutofocus(true)
+        .height(previewHeight)
+        .width(previewWidth)
+        .build();
+    qrEader.init();
     qrEader.start();
+
+    // change of reader state in dynamic
+     stateBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (qrEader.isCameraRunning()) {
+          qrEader.stop();
+        } else {
+          qrEader.start();
+        }
+      }
+    });
+    stateBtn.setVisibility(View.VISIBLE);
+  }
+
+  @Override protected void onResume() {
+    super.onResume();
+    if (qrEader != null)
+      qrEader.start();
+  }
+
+  @Override protected void onPause() {
+    super.onPause();
+    if (qrEader != null)
+      qrEader.stop();
   }
 
   @Override protected void onDestroy() {
     super.onDestroy();
+    if (qrEader != null)
+      qrEader.releaseAndCleanup();
+  }
 
-    // Call in onDestroy
-    qrEader.stop();
-    qrEader.releaseAndCleanup();
+  @Override public void onDetected(final String data) {
+    Log.d("QREader", "Value : " + data);
+    text.post(new Runnable() {
+      @Override
+      public void run() {
+        text.setText(data);
+      }
+    });
   }
 }
