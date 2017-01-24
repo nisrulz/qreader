@@ -54,7 +54,8 @@ public class QREader {
   private final int width;
   private final int height;
   private final int facing;
-  private final QRDataListener qrDataListener;
+  //Changed the qrDataListener from QRDataListenr to QrBarcodeListener
+  private final QRBarcodeListener qrDataListener;
   private final Context context;
   private final SurfaceView surfaceView;
   private boolean autoFocusEnabled;
@@ -173,7 +174,8 @@ public class QREader {
         public void receiveDetections(Detector.Detections<Barcode> detections) {
           final SparseArray<Barcode> barcodes = detections.getDetectedItems();
           if (barcodes.size() != 0 && qrDataListener != null) {
-            qrDataListener.onDetected(barcodes.valueAt(0).displayValue);
+            //Instead of just sending the string, the complete Barcode object is sent
+            qrDataListener.onDetected(barcodes.valueAt(0));
           }
         }
       });
@@ -274,7 +276,8 @@ public class QREader {
     private int width;
     private int height;
     private int facing;
-    private final QRDataListener qrDataListener;
+    //Changed the qrDataListener from QRDataListenr to QrBarcodeListener
+    private final QRBarcodeListener qrDataListener;
     private final Context context;
     private final SurfaceView surfaceView;
     private BarcodeDetector barcodeDetector;
@@ -289,7 +292,8 @@ public class QREader {
      * @param qrDataListener
      *     the qr data listener
      */
-    public Builder(Context context, SurfaceView surfaceView, QRDataListener qrDataListener) {
+    //Changed the qrDataListener from QRDataListenr to QrBarcodeListener
+    public Builder(Context context, SurfaceView surfaceView, QRBarcodeListener qrDataListener) {
       this.autofocusEnabled = true;
       this.width = 800;
       this.height = 800;

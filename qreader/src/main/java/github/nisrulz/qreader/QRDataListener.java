@@ -16,17 +16,52 @@
 
 package github.nisrulz.qreader;
 
+import android.graphics.Rect;
+
+import com.google.android.gms.vision.barcode.Barcode;
+
 /**
  * The interface Qr data listener.
  */
-public interface QRDataListener {
+public abstract class QRDataListener implements QRBarcodeListener {
 
-  /**
-   * On detected.
-   *
-   * @param data
-   *     the data
-   */
-  // Called from not main thread. Be careful
-  void onDetected(final String data);
+    //Added Rect to limit the reading area
+    private Rect readingArea;
+    //Added Rect that allows to get the read data area
+    private Rect readData;
+
+    /**
+     * On detected.
+     *
+     * @param data
+     *     the data
+     */
+    // Called from not main thread. Be careful
+    public abstract void onDetected(final String data);
+
+    @Override
+    public void onDetected(Barcode data) {
+        readData = data.getBoundingBox();
+        if(readingArea == null) {
+            onDetected(data.displayValue);
+        }
+        else {
+            if(readingArea.contains(readData)) {
+                onDetected(data.displayValue);
+            }
+        }
+
+
+    }
+
+    //readData is readOnly
+    public Rect getReadData() {
+      return readData;
+    }
+
+    //readingData is set only
+
+    public void setReadingArea(Rect readingArea) {
+      this.readingArea = readingArea;
+    }
 }
