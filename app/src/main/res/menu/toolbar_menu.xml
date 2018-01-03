@@ -30,9 +30,21 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_flash"
-        android:icon="@drawable/img_flash_on"
-        android:title="Flash On"
-        app:showAsAction="always" />
+        android:id="@+id/menu_gallery"
+        android:icon="@drawable/ic_action_gallery"
+        android:title="Pick from Gallery"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/ic_action_camera"
+        android:title="Pick from Camera"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_livedetection"
+        android:icon="@drawable/ic_action_live"
+        android:title="Live Detection Mode"
+        app:showAsAction="ifRoom" />
 
 </menu>
