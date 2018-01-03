@@ -38,7 +38,7 @@ android {
 dependencies {
     testImplementation 'junit:junit:4.12'
     // Add Vision API
-    implementation "com.google.android.gms:play-services-vision:$rootProject.ext.playServicesVersion"
+    api "com.google.android.gms:play-services-vision:$rootProject.ext.playServicesVersion"
 }
 
 apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/nishant-config.gradle'

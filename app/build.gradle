@@ -40,5 +40,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
-    implementation project(':qreader')
+
+//    implementation 'com.github.nisrulz:qreader:2.1.2'
+
+     implementation project(':qreader')
 }
