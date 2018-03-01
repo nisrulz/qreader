@@ -61,5 +61,13 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/restart_activity"
         />
+
+    <Button
+        android:id="@+id/btn_flash_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/text_btn_flash"
+        />
   </LinearLayout>
 </RelativeLayout>
