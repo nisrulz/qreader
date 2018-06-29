@@ -140,13 +140,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_flash:
-                if (qrEader.flashMode) {
-                    qrEader.turnFlashOff();
+                if (qrEader.isFlashOn()) {
                     menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_flash_on);
                 } else {
-                    qrEader.turnFlashOn();
                     menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_flash_off);
                 }
+                qrEader.toggleFlash();
                 break;
         }
 

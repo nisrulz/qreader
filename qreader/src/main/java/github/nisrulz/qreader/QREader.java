@@ -29,11 +29,13 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewTreeObserver;
+
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -187,7 +189,7 @@ public class QREader {
 
     private final SurfaceView surfaceView;
 
-    public static boolean flashMode = false;
+    private boolean flashOn = false;
 
     private final SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
         @Override
@@ -396,45 +398,31 @@ public class QREader {
     }
 
     /**
-     * Turn Flash On
+     * Turn Flash On/Off
      */
-    public void turnFlashOn() {
-
+    public void toggleFlash() {
         if (cameraSource == null)
             return;
 
-        Camera camera = getCamera(cameraSource);
+        final Camera camera = getCamera(cameraSource);
         if (camera != null) {
             try {
-                Camera.Parameters param = camera.getParameters();
-                param.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                final Camera.Parameters param = camera.getParameters();
+                if (flashOn) {
+                    param.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                } else {
+                    param.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                }
                 camera.setParameters(param);
-                flashMode = true;
-            } catch (Exception e) {
+                flashOn = !flashOn;
+            } catch (final RuntimeException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    /**
-     * Turn Flash Off
-     */
-    public void turnFlashOff() {
-
-        if (cameraSource == null)
-            return;
-
-        Camera camera = getCamera(cameraSource);
-        if (camera != null) {
-            try {
-                Camera.Parameters param = camera.getParameters();
-                param.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                camera.setParameters(param);
-                flashMode = false;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public boolean isFlashOn() {
+        return this.flashOn;
     }
 
     private static Camera getCamera(@NonNull CameraSource cameraSource) {

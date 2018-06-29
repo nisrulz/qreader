@@ -20,30 +20,31 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
-public class Utils {
+class Utils {
 
-    boolean checkCameraPermission(Context context) {
-        String permission = Manifest.permission.CAMERA;
-        int res = context.checkCallingOrSelfPermission(permission);
+    boolean checkCameraPermission(final Context context) {
+        final String permission = Manifest.permission.CAMERA;
+        final int res = context.checkCallingOrSelfPermission(permission);
         return res == PackageManager.PERMISSION_GRANTED;
     }
 
-    boolean hasAutofocus(Context context) {
+    boolean hasAutofocus(final Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
     }
 
-    boolean hasCameraHardware(Context context) {
+    boolean hasCameraHardware(final Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    void removeOnGlobalLayoutListener(View v,
-        ViewTreeObserver.OnGlobalLayoutListener listener) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+    @TargetApi(VERSION_CODES.JELLY_BEAN)
+    void removeOnGlobalLayoutListener(final View v,
+                                      final OnGlobalLayoutListener listener) {
+        if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN) {
             v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
         } else {
             v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);

@@ -16,6 +16,8 @@
 
 package github.nisrulz.qreader;
 
+import android.support.annotation.MainThread;
+
 /**
  * The interface Qr data listener.
  */
@@ -26,10 +28,11 @@ public interface QRDataListener {
      *
      * @param data the data
      */
-    // Called from not main thread. Be careful
-    void onDetected(final String data);
+    // Called on a different thread (Be careful)
+    void onDetected(String data);
 
     // Called on the main thread
-    void onReadQrError(final Exception exception);
+    @MainThread
+    void onReadQrError(Exception exception);
 
 }
