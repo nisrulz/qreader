@@ -104,21 +104,20 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.menu_start_pause_preview -> if (qrEader!!.isCameraRunning) {
-                qrEader!!.stop()
+            R.id.menu_start_pause_preview -> if (qrEader?.isCameraRunning == true) {
+                qrEader?.stop()
                 menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_start)
             } else {
-                qrEader!!.start()
+                qrEader?.start()
                 menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_pause)
             }
 
             R.id.menu_restart -> restartActivity()
 
             R.id.menu_flash -> {
-                if (qrEader!!.isFlashOn) {
-                    menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_on)
-                } else {
-                    menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_off)
+                when {
+                    qrEader?.isFlashOn == true -> menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_on)
+                    else -> menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_off)
                 }
                 qrEader?.toggleFlash()
             }
@@ -131,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         qrEader = QREader.Builder(this, object : QRDataListener {
             override fun onDetected(data: String) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo!!.post { txtQrCodeInfo!!.text = data }
+                txtQrCodeInfo?.post { txtQrCodeInfo?.text = data }
             }
 
             override fun onReadQrError(exception: Exception) {
@@ -139,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             }
         }).build()
 
-        val bitmap = qrEader!!.getBitmapFromDrawable(resID)
+        val bitmap = qrEader?.getBitmapFromDrawable(resID)
         qrEader?.readFromBitmap(bitmap)
     }
 
@@ -149,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         qrEader = QREader.Builder(this, object : QRDataListener {
             override fun onDetected(data: String) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo!!.post { txtQrCodeInfo!!.text = data }
+                txtQrCodeInfo.post { txtQrCodeInfo.text = data }
             }
 
             override fun onReadQrError(exception: Exception) {
@@ -158,8 +157,8 @@ class MainActivity : AppCompatActivity() {
             }
         }).facing(QREader.BACK_CAM)
                 .enableAutofocus(true)
-                .height(surfaceViewCamera!!.height)
-                .width(surfaceViewCamera!!.width)
+                .height(surfaceViewCamera.height)
+                .width(surfaceViewCamera.width)
                 .surfaceView(surfaceViewCamera)
                 .build()
     }
