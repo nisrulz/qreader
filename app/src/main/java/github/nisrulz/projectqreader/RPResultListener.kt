@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package github.nisrulz.projectqreader;
+package github.nisrulz.projectqreader
 
 interface RPResultListener {
 
-    void onPermissionDenied();
+    fun onPermissionDenied()
 
-    void onPermissionGranted();
+    fun onPermissionGranted()
 }

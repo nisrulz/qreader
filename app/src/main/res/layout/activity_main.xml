@@ -21,7 +21,7 @@
     android:gravity="center">
 
     <SurfaceView
-        android:id="@+id/camera_view"
+        android:id="@+id/surfaceViewCamera"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -32,7 +32,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/code_info"
+        android:id="@+id/txtQrCodeInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/accent"
