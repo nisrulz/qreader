@@ -35,10 +35,12 @@ ext {
 
             lifeycle_runtime        : '1.1.1',
             playServicesVersion     : '15.0.2',
+            kotlinVersion           : '1.2.50'
     ]
 
 
     googlePlayServices = [vision: "com.google.android.gms:play-services-vision:$versions.playServicesVersion"]
+    kotlin = [stdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"]
 
 
     junit = [junit: "junit:junit:$versions.junit"]
@@ -66,6 +68,7 @@ ext {
 
     gradlePlug = [
             android: "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+            kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion",
             bintray: "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.gradleBintrayPlugin",
             maven  : "com.github.dcendents:android-maven-gradle-plugin:$versions.androidMavenGradlePlugin"
     ]

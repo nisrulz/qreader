@@ -15,6 +15,8 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
@@ -45,14 +47,22 @@ android {
         explainIssues true
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // Kotlin
+    implementation kotlin.stdLib
+    // Support
     implementation supportLibs
+    //Testing
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
-
+    // QREader
     //implementation 'com.github.nisrulz:qreader:2.1.2'
-     implementation project(':qreader')
+    implementation project(':qreader')
 }
