@@ -17,19 +17,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    // Gradle will not find vars defined in an external file when referring to them
+    // in the buildscript block, unless you link it from the buildscript block, too.
+    apply from: 'dependencies.gradle'
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-
-        // Required plugins added to classpath to facilitate pushing to Jcenter/Bintray
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        // See dependencies.gradle for declaration of plugins.
+        classpath gradlePlugins
     }
 }
 
@@ -42,27 +40,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-
-ext {
-    //Other
-    targetSdkVersion = 27
-    minSdkVersion = 14
-    compileSdkVersion = targetSdkVersion
-    buildToolsVersion = '27.0.3'
-    supportLibVersion = '27.0.2'
-    playServicesVersion = '11.8.0'
-
-    // Library Info
-    libVersionCode = 13
-    libVersionName = '2.2.0'
-    libPomUrl = 'https://github.com/nisrulz/qreader'
-    libGithubRepo = 'nisrulz/qreader'
-
-
-    libModuleName = 'qreader'
-    libModuleDesc =
-        'Android library that uses google\'s mobile vision api and simplify the QR code reading process'
-    libBintrayName = 'com.github.nisrulz:qreader'
 }

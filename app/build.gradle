@@ -15,17 +15,19 @@
  */
 
 apply plugin: 'com.android.application'
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
         applicationId "github.nisrulz.projectqreader"
-        versionCode 2
-        versionName "1.0.1"
+        versionCode versions.appVersionCode
+        versionName versions.appVersionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -33,15 +35,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        textOutput "stdout"
+        textReport true
+        checkAllWarnings true
+        warningsAsErrors true
+        showAll true
+        explainIssues true
+        abortOnError false
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation supportLibs
+    testImplementation unitTestLibs
+    androidTestImplementation androidTestsLibs
 
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
-
-//    implementation 'com.github.nisrulz:qreader:2.1.2'
-
+    //implementation 'com.github.nisrulz:qreader:2.1.2'
      implementation project(':qreader')
 }
