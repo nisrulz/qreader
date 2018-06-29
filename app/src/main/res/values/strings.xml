@@ -18,5 +18,9 @@
     <string name="app_name">QREader</string>
     <string name="intro_text">Point the camera view to a QR Code to read the information</string>
     <string name="restart_activity">Restart Activity</string>
-    <string name="stop_start_qreader">Stop QREader</string>
+    <string name="pick_from_gallery">Pick from Gallery</string>
+    <string name="pick_from_camera">Pick from Camera</string>
+    <string name="live_detection_mode">Live Detection Mode</string>
+    <string name="flash">Flash</string>
+    <string name="start_stop">Start/Stop</string>
 </resources>

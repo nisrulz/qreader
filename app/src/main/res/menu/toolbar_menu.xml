@@ -19,32 +19,38 @@
 
     <item
         android:id="@+id/menu_start_pause_preview"
-        android:icon="@drawable/img_pause"
-        android:title="Start/Stop"
+        android:icon="@drawable/ic_action_pause"
+        android:title="@string/start_stop"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_restart"
-        android:icon="@drawable/img_refresh"
-        android:title="Restart Activity"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/restart_activity"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_gallery"
         android:icon="@drawable/ic_action_gallery"
-        android:title="Pick from Gallery"
+        android:title="@string/pick_from_gallery"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_camera"
         android:icon="@drawable/ic_action_camera"
-        android:title="Pick from Camera"
+        android:title="@string/pick_from_camera"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_livedetection"
         android:icon="@drawable/ic_action_live"
-        android:title="Live Detection Mode"
+        android:title="@string/live_detection_mode"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_flash"
+        android:icon="@drawable/ic_action_flash_off"
+        android:title="@string/flash"
         app:showAsAction="ifRoom" />
 
 </menu>

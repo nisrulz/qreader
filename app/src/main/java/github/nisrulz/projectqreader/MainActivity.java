@@ -128,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_start_pause_preview:
                 if (qrEader.isCameraRunning()) {
                     qrEader.stop();
-                    menu.findItem(item.getItemId()).setIcon(R.drawable.img_start);
+                    menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_start);
                 } else {
                     qrEader.start();
-                    menu.findItem(item.getItemId()).setIcon(R.drawable.img_pause);
+                    menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_pause);
                 }
                 break;
 
@@ -142,10 +142,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_flash:
                 if (qrEader.flashMode) {
                     qrEader.turnFlashOff();
-                    menu.findItem(item.getItemId()).setIcon(R.drawable.img_flash_on);
+                    menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_flash_on);
                 } else {
                     qrEader.turnFlashOn();
-                    menu.findItem(item.getItemId()).setIcon(R.drawable.img_flash_off);
+                    menu.findItem(item.getItemId()).setIcon(R.drawable.ic_action_flash_off);
                 }
                 break;
         }
