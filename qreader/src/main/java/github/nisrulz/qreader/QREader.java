@@ -59,7 +59,7 @@ public class QREader {
 
         private int height;
 
-        private final QRDataListener qrDataListener;
+        private final QRBarcodeListener qrDataListener;
 
         private SurfaceView surfaceView;
 
@@ -71,7 +71,7 @@ public class QREader {
          * @param context        the context
          * @param qrDataListener the qr data listener
          */
-        public Builder(Context context, QRDataListener qrDataListener) {
+        public Builder(Context context, QRBarcodeListener qrDataListener) {
             this.autofocusEnabled = true;
             this.width = 800;
             this.height = 800;
@@ -183,7 +183,7 @@ public class QREader {
 
     private final int height;
 
-    private final QRDataListener qrDataListener;
+    private final QRBarcodeListener qrDataListener;
 
     private boolean surfaceCreated = false;
 
@@ -248,14 +248,14 @@ public class QREader {
 
     public void initAndStart(final SurfaceView surfaceView) {
         surfaceView.getViewTreeObserver()
-            .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    init();
-                    start();
-                    utils.removeOnGlobalLayoutListener(surfaceView, this);
-                }
-            });
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        init();
+                        start();
+                        utils.removeOnGlobalLayoutListener(surfaceView, this);
+                    }
+                });
     }
 
     /**
@@ -276,7 +276,7 @@ public class QREader {
                 Frame frame = new Frame.Builder().setBitmap(bitmap).build();
                 SparseArray<Barcode> barcodes = barcodeDetector.detect(frame);
                 if (barcodes.size() != 0 && qrDataListener != null) {
-                    qrDataListener.onDetected(barcodes.valueAt(0).rawValue);
+                    qrDataListener.onDetected(barcodes.valueAt(0));
                 }
             } catch (Exception e) {
                 qrDataListener.onReadQrError(e);
@@ -330,10 +330,10 @@ public class QREader {
     private CameraSource getCameraSource() {
         if (cameraSource == null) {
             cameraSource =
-                new CameraSource.Builder(context, barcodeDetector).setAutoFocusEnabled(autoFocusEnabled)
-                    .setFacing(facing)
-                    .setRequestedPreviewSize(width, height)
-                    .build();
+                    new CameraSource.Builder(context, barcodeDetector).setAutoFocusEnabled(autoFocusEnabled)
+                            .setFacing(facing)
+                            .setRequestedPreviewSize(width, height)
+                            .build();
         }
         return cameraSource;
     }
@@ -362,7 +362,7 @@ public class QREader {
                 public void receiveDetections(Detector.Detections<Barcode> detections) {
                     final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                     if (barcodes.size() != 0 && qrDataListener != null) {
-                        qrDataListener.onDetected(barcodes.valueAt(0).displayValue);
+                        qrDataListener.onDetected(barcodes.valueAt(0));
                     }
                 }
 
@@ -379,13 +379,13 @@ public class QREader {
     }
 
     private void startCameraView(Context context, CameraSource cameraSource,
-        SurfaceView surfaceView) {
+            SurfaceView surfaceView) {
         if (cameraRunning) {
             throw new IllegalStateException("Camera already started!");
         }
         try {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
+                    != PackageManager.PERMISSION_GRANTED) {
                 Log.e(LOGTAG, "Permission not granted!");
             } else if (!cameraRunning && cameraSource != null && surfaceView != null) {
                 cameraSource.start(surfaceView.getHolder());
@@ -401,8 +401,9 @@ public class QREader {
      * Turn Flash On/Off
      */
     public void toggleFlash() {
-        if (cameraSource == null)
+        if (cameraSource == null) {
             return;
+        }
 
         final Camera camera = getCamera(cameraSource);
         if (camera != null) {

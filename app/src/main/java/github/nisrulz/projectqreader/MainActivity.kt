@@ -24,13 +24,16 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import github.nisrulz.qreader.QRDataListener
+import com.google.android.gms.vision.barcode.Barcode
+import github.nisrulz.qreader.QRBarcodeListener
 import github.nisrulz.qreader.QREader
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.surfaceViewCamera
+import kotlinx.android.synthetic.main.activity_main.txtQrCodeInfo
 
 class MainActivity : AppCompatActivity() {
 
     private var hasCameraPermission = false
+    private val cameraPerm = Manifest.permission.CAMERA
 
     private var menu: Menu? = null
 
@@ -127,10 +130,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     internal fun readQRCodeFromDrawable(resID: Int) {
-        qrEader = QREader.Builder(this, object : QRDataListener {
-            override fun onDetected(data: String) {
+        qrEader = QREader.Builder(this, object : QRBarcodeListener {
+            override fun onDetected(data: Barcode) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo?.post { txtQrCodeInfo?.text = data }
+                txtQrCodeInfo?.post { txtQrCodeInfo?.text = data.displayValue }
             }
 
             override fun onReadQrError(exception: Exception) {
@@ -145,17 +148,20 @@ class MainActivity : AppCompatActivity() {
     internal fun setupQREader() {
         // Init QREader
         // ------------
-        qrEader = QREader.Builder(this, object : QRDataListener {
-            override fun onDetected(data: String) {
+        val qrDataListener = object : QRBarcodeListener {
+            override fun onDetected(data: Barcode) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo.post { txtQrCodeInfo.text = data }
+
+                //The area of the read data
+                txtQrCodeInfo.post { txtQrCodeInfo.text = data.displayValue }
             }
 
             override fun onReadQrError(exception: Exception) {
                 Toast.makeText(this@MainActivity, "Cannot open camera", Toast.LENGTH_LONG).show()
 
             }
-        }).facing(QREader.BACK_CAM)
+        }
+        qrEader = QREader.Builder(this, qrDataListener).facing(QREader.BACK_CAM)
                 .enableAutofocus(true)
                 .height(surfaceViewCamera.height)
                 .width(surfaceViewCamera.width)
@@ -168,7 +174,4 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    companion object {
-        private val cameraPerm = Manifest.permission.CAMERA
-    }
 }
