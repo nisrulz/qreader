@@ -25,7 +25,7 @@
 
         <!-- Add this to enable bar code reader -->
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode" />
 
     </application>

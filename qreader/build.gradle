@@ -52,7 +52,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation supportDeps.supportAnnotation
-    api googlePlayServices.vision
+
+    api 'com.google.firebase:firebase-ml-vision:16.0.0'
 
     // Testing
     testImplementation unitTestLibs
