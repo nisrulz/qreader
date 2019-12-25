@@ -23,7 +23,7 @@ ext {
             targetSdk               : 29,
             compileSdk              : 29,
 
-            androidGradlePlugin     : '3.2.1',
+            androidGradlePlugin     : '3.5.3',
             gradleBintrayPlugin     : '1.8.4',
             androidMavenGradlePlugin: '2.1',
 
