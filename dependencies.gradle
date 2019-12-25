@@ -20,8 +20,8 @@ ext {
             appVersionName          : '1.0.1',
 
             minSdk                  : 14,
-            targetSdk               : 28,
-            compileSdk              : 28,
+            targetSdk               : 29,
+            compileSdk              : 29,
 
             androidGradlePlugin     : '3.2.1',
             gradleBintrayPlugin     : '1.8.4',
