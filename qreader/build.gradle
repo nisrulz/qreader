@@ -48,7 +48,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation androidXDeps.annotation
-    api googlePlayServices.vision
+    api vision
 }
 
 apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/v2/publish-config.gradle'

@@ -22,13 +22,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewTreeObserver;
+
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -379,7 +379,7 @@ public class QREader {
     }
 
     private void startCameraView(Context context, CameraSource cameraSource,
-        SurfaceView surfaceView) {
+                                 SurfaceView surfaceView) {
         if (cameraRunning) {
             throw new IllegalStateException("Camera already started!");
         }
@@ -425,7 +425,7 @@ public class QREader {
         return this.flashOn;
     }
 
-    private static Camera getCamera(@NonNull CameraSource cameraSource) {
+    private static Camera getCamera(CameraSource cameraSource) {
         Field[] declaredFields = CameraSource.class.getDeclaredFields();
 
         for (Field field : declaredFields) {

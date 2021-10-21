@@ -35,7 +35,7 @@ ext {
     ]
 
 
-    googlePlayServices = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
+    visionDeps = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
     kotlin = [stdLib: "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"]
 
 
@@ -55,4 +55,5 @@ ext {
 
     gradlePlugins = gradlePlug.values()
     androidX = androidXDeps.values()
+    vision = visionDeps.values()
 }
