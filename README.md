@@ -11,13 +11,9 @@
 </div>
 <br/>
 <div align="center">
-    <!-- Bintray -->
-    <a href="https://bintray.com/nisrulz/maven/com.github.nisrulz%3Aqreader/_latestVersion">
-        <img src="https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Aqreader/images/download.svg"/>
-    </a>
     <!-- API -->
-    <a href="https://android-arsenal.com/api?level=14">
-        <img src="https://img.shields.io/badge/API-14%2B-orange.svg?style=flat"/>
+    <a href="https://android-arsenal.com/api?level=21">
+        <img src="https://img.shields.io/badge/API-21%2B-orange.svg?style=flat"/>
     </a>
     <!-- Android Arsenal -->
     <a href="https://android-arsenal.com/details/1/3478">
@@ -72,21 +68,13 @@
 Starting with `1.0.4`, Changes exist in the [releases tab](https://github.com/nisrulz/qreader/releases).
 
 # Integration
-QREader is available in the Jcenter, so getting it as simple as adding it as a dependency
-
-- For gradle version < 4.0
+QReader is available in the MavenCentral, so getting it as simple as adding it as a dependency
 
     ```gradle
     implementation 'com.github.nisrulz:qreader:{latest version}'
     ```
 
-- For gradle 4.0+
-
-    ```gradle
-    implementation 'com.github.nisrulz:qreader:{latest version}'
-    ```
-
-where `{latest version}` corresponds to published version in [ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Aqreader/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Aqreader/_latestVersion)
+where `{latest version}` corresponds to published version in [MavenCentral](https://search.maven.org/artifact/com.github.nisrulz/qreader)
 
 > Requires Google Play Services i.e it works on devices which have Google Play Store installed
 
