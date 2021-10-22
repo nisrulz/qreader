@@ -16,7 +16,7 @@
 
 apply plugin: 'com.android.library'
 apply from: '../dependencies.gradle'
-apply from: '../libconfig.gradle'
+//apply from: '../libconfig.gradle'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -24,12 +24,8 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode libConfig.versionCode
-        versionName libConfig.versionName
 
         consumerProguardFiles 'consumer-proguard-rules.pro'
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -51,12 +47,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation supportDeps.supportAnnotation
-    api googlePlayServices.vision
-
-    // Testing
-    testImplementation unitTestLibs
-    androidTestImplementation androidTestsLibs
+    implementation androidXDeps.annotation
+    api vision
 }
 
 apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/v2/publish-config.gradle'

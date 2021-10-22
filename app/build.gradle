@@ -29,7 +29,7 @@ android {
         applicationId "github.nisrulz.projectqreader"
         versionCode versions.appVersionCode
         versionName versions.appVersionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -47,22 +47,14 @@ android {
         explainIssues true
         abortOnError false
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    // Kotlin
-    implementation kotlin.stdLib
     // Support
-    implementation supportLibs
-    //Testing
-    testImplementation unitTestLibs
-    androidTestImplementation androidTestsLibs
+    implementation androidX
+
     // QREader
-    //implementation 'com.github.nisrulz:qreader:2.1.2'
+    //implementation 'com.github.nisrulz:qreader:2.2.0'
     implementation project(':qreader')
 }

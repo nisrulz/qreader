@@ -16,66 +16,44 @@
 
 ext {
     versions = [
-            appVersionCode          : 2,
-            appVersionName          : '1.0.1',
+        appVersionCode     : 2,
+        appVersionName     : '1.0.1',
 
-            minSdk                  : 14,
-            targetSdk               : 29,
-            compileSdk              : 29,
+        minSdk             : 21,
+        targetSdk          : 31,
+        compileSdk         : 31,
 
-            androidGradlePlugin     : '3.5.3',
-            gradleBintrayPlugin     : '1.8.4',
-            androidMavenGradlePlugin: '2.1',
+        androidGradlePlugin: '7.0.3',
+        kotlinVersion      : '1.5.31',
 
-            support                 : '28.0.0',
+        appcompat          : '1.0.2',
+        annotation         : '1.2.0',
 
-            junit                   : '4.12',
-            espresso                : '3.0.2',
-            testRunner              : '1.0.2',
+        lifeycle_runtime   : '2.3.1',
+        vision             : '21.0.0',
 
-            lifeycle_runtime        : '1.1.1',
-            playServicesVersion     : '15.0.2',
-            kotlinVersion           : '1.3.61'
     ]
 
 
-    googlePlayServices = [vision: "com.google.android.gms:play-services-vision:$versions.playServicesVersion"]
-    kotlin = [stdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlinVersion"]
+    visionDeps = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
+    kotlin = [stdLib: "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"]
 
-
-    junit = [junit: "junit:junit:$versions.junit"]
 
     lifecycle = [
-            'runtime': "android.arch.lifecycle:runtime:$versions.lifeycle_runtime"
+        'runtime': "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifeycle_runtime"
     ]
 
-    supportDeps = [
-            appcompatV7      : "com.android.support:appcompat-v7:$versions.support",
-            supportAnnotation: "com.android.support:support-annotations:$versions.support"
-    ]
-
-    unitTest = [
-            supportAnnotation: "com.android.support:support-annotations:$versions.support",
-    ] + junit
-
-    androidTests = [
-            espressoCore   : "com.android.support.test.espresso:espresso-core:$versions.espresso",
-            espressoContrib: "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
-            espressoIntents: "com.android.support.test.espresso:espresso-intents:$versions.espresso",
-            testRunner     : "com.android.support.test:runner:$versions.testRunner",
-            testRules      : "com.android.support.test:rules:$versions.testRunner",
+    androidXDeps = [
+        appcompat : "androidx.appcompat:appcompat:$versions.appcompat",
+        annotation: "androidx.annotation:annotation:$versions.annotation"
     ]
 
     gradlePlug = [
-            android: "com.android.tools.build:gradle:$versions.androidGradlePlugin",
-            kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion",
-            bintray: "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.gradleBintrayPlugin",
-            maven  : "com.github.dcendents:android-maven-gradle-plugin:$versions.androidMavenGradlePlugin"
+        android: "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+        kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion",
     ]
 
     gradlePlugins = gradlePlug.values()
-
-    supportLibs = supportDeps.values()
-    unitTestLibs = unitTest.values()
-    androidTestsLibs = androidTests.values() + supportLibs
+    androidX = androidXDeps.values()
+    vision = visionDeps.values()
 }

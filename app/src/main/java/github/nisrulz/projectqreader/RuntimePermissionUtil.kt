@@ -19,7 +19,7 @@ package github.nisrulz.projectqreader
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 
 object RuntimePermissionUtil {
 

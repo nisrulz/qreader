@@ -38,17 +38,13 @@ class Utils {
     }
 
     boolean hasCameraHardware(final Context context) {
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 
     @TargetApi(VERSION_CODES.JELLY_BEAN)
     void removeOnGlobalLayoutListener(final View v,
                                       final OnGlobalLayoutListener listener) {
-        if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN) {
-            v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
-        } else {
-            v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
-        }
+        v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
     }
 
 }
