@@ -35,10 +35,6 @@
     <a href="https://github.com/nisrulz/qreader">
         <img src="https://img.shields.io/github/watchers/nisrulz/qreader.svg?style=social&label=Watch"/>
     </a>
-    <!-- Say Thanks! -->
-    <a href="https://saythanks.io/to/nisrulz">
-        <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg"/>
-    </a>
     <a href="https://www.paypal.me/nisrulz/5">
         <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
     </a>
@@ -64,119 +60,23 @@
 <br/>
 
 
-# Changelog
+## Changelog
 Starting with `1.0.4`, Changes exist in the [releases tab](https://github.com/nisrulz/qreader/releases).
 
-# Integration
+## Integration
 QReader is available in the MavenCentral, so getting it as simple as adding it as a dependency
 
-    ```gradle
-    implementation 'com.github.nisrulz:qreader:{latest version}'
-    ```
+```gradle
+implementation 'com.github.nisrulz:qreader:{latest version}'
+```
 
 where `{latest version}` corresponds to published version in [MavenCentral](https://search.maven.org/artifact/com.github.nisrulz/qreader)
 
-> Requires Google Play Services i.e it works on devices which have Google Play Store installed
+> *Requires Google Play Services i.e it works on devices which have Google Play Store installed*
 
+Next, read the detailed [Usage Docs](docs/usage.md)
+## Pull Requests
 
-# Usage Docs
-
-### Steps
-
-1. Add a `SurfaceView` to your layout
-
-    ```xml
-    <SurfaceView
-      android:id="@+id/camera_view"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      />
-    ```
-
-1. Setup `SurfaceView` and `QREader` in `onCreate()`
-
-    ```java
-    // QREader
-    private SurfaceView mySurfaceView;
-    private QREader qrEader;
-    ..
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_main);
-      ..
-      ..
-
-      // Setup SurfaceView
-      // -----------------
-      mySurfaceView = (SurfaceView) findViewById(R.id.camera_view);
-
-      // Init QREader
-      // ------------
-      qrEader = new QREader.Builder(this, mySurfaceView, new QRDataListener() {
-            @Override
-            public void onDetected(final String data) {
-                Log.d("QREader", "Value : " + data);
-            }
-
-            @Override
-            public void onReadQrError(final Exception exception) {
-                Toast.makeText(MainActivity.this, "Cannot open camera", Toast.LENGTH_LONG).show();
-            }
-        }).facing(QREader.BACK_CAM)
-                .enableAutofocus(true)
-                .height(mySurfaceView.getHeight())
-                .width(mySurfaceView.getWidth())
-                .build();
-
-    }
-    ```
-
-1. Initialize and Start in `onResume()`
-
-    ```java
-      @Override
-      protected void onResume() {
-        super.onResume();
-
-        // Init and Start with SurfaceView
-        // -------------------------------
-        qrEader.initAndStart(mySurfaceView);
-      }
-    ```
-1. Cleanup in `onPause()`
-
-    ```java
-      @Override
-      protected void onPause() {
-        super.onPause();
-
-        // Cleanup in onPause()
-        // --------------------
-        qrEader.releaseAndCleanup();
-      }
-    ```
-#### Some provided utility functions which you can use
-+ To check if the camera is running
-
-    ```java
-    boolean isCameraRunning = qrEader.isCameraRunning()
-    ```
-
-+ To stop `QREader`
-
-    ```java
-    qrEader.stop();
-    ```
-+ To start `QREader`
-
-    ```java
-    qrEader.start();
-    ```
-> ##### Check the included sample app for a working example.
-
-# Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
   1. Match coding style (braces, spacing, etc.) This is best achieved using CMD+Option+L (Reformat code) on Mac (not sure for Windows) with Android Studio defaults. This project uses a [modified version of Grandcentrix's code style](https://github.com/nisrulz/AndroidCodeStyle/tree/nishant-config), so please use the same when editing this project.
   2. If its a feature, bugfix, or anything please only change code to what you specify.
@@ -185,13 +85,32 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
   5. Check for existing [issues](https://github.com/nisrulz/qreader/issues) first, before filing an issue.  
   6. Have fun!
 
-## Author & support
+## Author & Contributors
+
 This project was created by [Nishant Srivastava](https://github.com/nisrulz/nisrulz.github.io#nishant-srivastava) but hopefully developed and maintained by many others. See the [the list of contributors here](https://github.com/nisrulz/qreader/graphs/contributors).
 
-> If you appreciate my work, consider buying me a cup of :coffee: to keep me recharged :metal:
->  + [PayPal](https://www.paypal.me/nisrulz/5)
->  + Bitcoin Address: 13PjuJcfVW2Ad81fawqwLtku4bZLv1AxCL
->
-> I love using my work and I'm available for contract work. Freelancing helps to maintain and keep [my open source projects](https://github.com/nisrulz/) up to date!
+## Ways You Can Help/Support this project
 
-<img src="http://forthebadge.com/images/badges/built-for-android.svg" />
+- **Star** this repository and tell all your friends about it.
+- **Watch** for new releases to get an update if something happens.
+- [**Open an Issue**](https://github.com/nisrulz/qreader/issues/new/choose) if you catch any error in within the project or want to request enhancement/feature.
+- **Open a Pull Request** to help fix [existing issues](https://github.com/nisrulz/qreader/issues).
+
+- If you can spare a few 💵:
+
+  - [Buy me a coffee :coffee:](https://www.buymeacoffee.com/nisrulz) (one-time),
+  - or [Sponsor me on GitHub](https://github.com/sponsors/nisrulz) (recurring monthly).
+
+- Tell me you like this project or how it helped you out!
+
+  - [Comment in the project's guestbook](https://github.com/nisrulz/qreader/issues/76) :blush:,
+  - Reach out on [Twitter](https://twitter.com/nisrulz),
+  - or [send a nice email my way](mailto:nisrulz@gmail.com)!
+
+Thanks for your interest in this project :heart:
+
+### License
+
+Copyright 2016-Present Nishant Srivastava
+
+[Apache License, Version 2.0](LICENSE.txt)
