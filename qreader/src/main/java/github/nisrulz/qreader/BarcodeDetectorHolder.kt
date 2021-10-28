@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package github.nisrulz.qreader
 
-package github.nisrulz.qreader;
-
-import android.content.Context;
-
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.android.gms.vision.barcode.BarcodeDetector.Builder;
+import android.content.Context
+import com.google.android.gms.vision.barcode.Barcode
+import com.google.android.gms.vision.barcode.BarcodeDetector
 
 /**
  * The type Barcode detector holder.
  */
-final class BarcodeDetectorHolder {
-
-    private static BarcodeDetector detector = null;
+internal object BarcodeDetectorHolder {
+    private var detector: BarcodeDetector? = null
 
     /**
      * Gets barcode detector.
@@ -35,12 +31,13 @@ final class BarcodeDetectorHolder {
      * @param context the context
      * @return the barcode detector
      */
-    static BarcodeDetector getBarcodeDetector(final Context context) {
-        if (BarcodeDetectorHolder.detector == null) {
-            BarcodeDetectorHolder.detector = new Builder(context.getApplicationContext()).setBarcodeFormats(
-                    Barcode.QR_CODE).build();
+    @JvmStatic
+    fun getBarcodeDetector(context: Context): BarcodeDetector? {
+        if (detector == null) {
+            detector = BarcodeDetector.Builder(context.applicationContext).setBarcodeFormats(
+                Barcode.QR_CODE
+            ).build()
         }
-        return BarcodeDetectorHolder.detector;
+        return detector
     }
 }
-

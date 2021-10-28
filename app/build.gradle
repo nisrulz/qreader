@@ -16,7 +16,6 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
@@ -36,6 +35,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        // Enabled View Binding
+        viewBinding true
     }
 }
 
