@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package github.nisrulz.qreader;
+package github.nisrulz.qreader
 
 /**
  * The interface Qr data listener.
  */
-public interface QRDataListener {
-
+interface QRDataListener {
     /**
      * On detected.
      *
      * @param data the data
      */
     // Called on a different thread (Be careful)
-    void onDetected(String data);
+    fun onDetected(data: String?)
 
     // Called on the main thread
-    void onReadQrError(Exception exception);
+    fun onReadQrError(exception: Exception?)
 }

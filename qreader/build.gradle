@@ -15,6 +15,7 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: '../dependencies.gradle'
 //apply from: '../libconfig.gradle'
 
@@ -40,5 +41,3 @@ dependencies {
     implementation androidXDeps.annotation
     api vision
 }
-
-apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/v2/publish-config.gradle'

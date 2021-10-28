@@ -24,11 +24,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import github.nisrulz.projectqreader.databinding.ActivityMainBinding
 import github.nisrulz.qreader.QRDataListener
 import github.nisrulz.qreader.QREader
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private var hasCameraPermission = false
 
@@ -39,7 +41,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.apply {
+            setContentView(root)
+            wireupUserInterface(this)
+        }
+    }
+
+    private fun wireupUserInterface(binding: ActivityMainBinding) {
         hasCameraPermission = RuntimePermissionUtil.checkPermissonGranted(this, cameraPerm)
 
 
@@ -64,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             // Init and Start with SurfaceView
             // -------------------------------
-            qrEader?.initAndStart(surfaceViewCamera)
+            qrEader?.initAndStart(binding.surfaceViewCamera)
         }
     }
 
@@ -75,23 +84,33 @@ class MainActivity : AppCompatActivity() {
 
             // Cleanup in onPause()
             // --------------------
-            qrEader!!.releaseAndCleanup()
+            qrEader?.releaseAndCleanup()
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == 100) {
-            RuntimePermissionUtil.onRequestPermissionsResult(grantResults, object : RPResultListener {
-                override fun onPermissionDenied() {
-                    // do nothing
-                }
-
-                override fun onPermissionGranted() {
-                    if (RuntimePermissionUtil.checkPermissonGranted(this@MainActivity, cameraPerm)) {
-                        restartActivity()
+            RuntimePermissionUtil.onRequestPermissionsResult(
+                grantResults,
+                object : RPResultListener {
+                    override fun onPermissionDenied() {
+                        // do nothing
                     }
-                }
-            })
+
+                    override fun onPermissionGranted() {
+                        if (RuntimePermissionUtil.checkPermissonGranted(
+                                this@MainActivity,
+                                cameraPerm
+                            )
+                        ) {
+                            restartActivity()
+                        }
+                    }
+                })
         }
     }
 
@@ -116,7 +135,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.menu_flash -> {
                 when {
-                    qrEader?.isFlashOn == true -> menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_on)
+                    qrEader?.isFlashOn == true -> menu?.findItem(item.itemId)
+                        ?.setIcon(R.drawable.ic_action_flash_on)
                     else -> menu?.findItem(item.itemId)?.setIcon(R.drawable.ic_action_flash_off)
                 }
                 qrEader?.toggleFlash()
@@ -130,11 +150,12 @@ class MainActivity : AppCompatActivity() {
         qrEader = QREader.Builder(this, object : QRDataListener {
             override fun onDetected(data: String) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo?.post { txtQrCodeInfo?.text = data }
+                binding.txtQrCodeInfo.post { binding.txtQrCodeInfo.text = data }
             }
 
             override fun onReadQrError(exception: Exception) {
-                Toast.makeText(this@MainActivity, exception.localizedMessage, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, exception.localizedMessage, Toast.LENGTH_LONG)
+                    .show()
             }
         }).build()
 
@@ -148,7 +169,7 @@ class MainActivity : AppCompatActivity() {
         qrEader = QREader.Builder(this, object : QRDataListener {
             override fun onDetected(data: String) {
                 Log.d("QREader", "Value : $data")
-                txtQrCodeInfo.post { txtQrCodeInfo.text = data }
+                binding.txtQrCodeInfo.post { binding.txtQrCodeInfo.text = data }
             }
 
             override fun onReadQrError(exception: Exception) {
@@ -156,11 +177,11 @@ class MainActivity : AppCompatActivity() {
 
             }
         }).facing(QREader.BACK_CAM)
-                .enableAutofocus(true)
-                .height(surfaceViewCamera.height)
-                .width(surfaceViewCamera.width)
-                .surfaceView(surfaceViewCamera)
-                .build()
+            .enableAutofocus(true)
+            .height(binding.surfaceViewCamera.height)
+            .width(binding.surfaceViewCamera.width)
+            .surfaceView(binding.surfaceViewCamera)
+            .build()
     }
 
     private fun restartActivity() {
