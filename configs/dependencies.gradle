@@ -16,40 +16,33 @@
 
 ext {
     versions = [
-        appVersionCode     : 2,
-        appVersionName     : '1.0.1',
+        appVersionCode  : 2,
+        appVersionName  : '1.0.1',
 
-        minSdk             : 21,
-        targetSdk          : 31,
-        compileSdk         : 31,
+        minSdk          : 21,
+        targetSdk       : 31,
+        compileSdk      : 31,
 
-        androidGradlePlugin: '7.0.3',
-        kotlinVersion      : '1.5.31',
+        appcompat       : '1.0.2',
+        annotation      : '1.2.0',
+        lifeycle_runtime: '2.3.1',
 
-        appcompat          : '1.0.2',
-        annotation         : '1.2.0',
-
-        lifeycle_runtime   : '2.3.1',
-        vision             : '21.0.0',
+        vision          : '21.0.0',
 
     ]
-
 
     visionDeps = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
 
-
-    lifecycle = [
-        'runtime': "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifeycle_runtime"
-    ]
-
     androidXDeps = [
-        appcompat : "androidx.appcompat:appcompat:$versions.appcompat",
-        annotation: "androidx.annotation:annotation:$versions.annotation"
+        appcompat        : "androidx.appcompat:appcompat:$versions.appcompat",
+        annotation       : "androidx.annotation:annotation:$versions.annotation",
+        lifecycle_runtime: "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifeycle_runtime"
     ]
 
     gradlePlug = [
-        android: "com.android.tools.build:gradle:$versions.androidGradlePlugin",
-        kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion",
+        android     : "com.android.tools.build:gradle:7.0.3",
+        kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31",
+        nexus_plugin: "com.vanniktech:gradle-maven-publish-plugin:0.18.0",
     ]
 
     gradlePlugins = gradlePlug.values()

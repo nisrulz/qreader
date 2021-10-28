@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply from: '../dependencies.gradle'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+// Apply common configs
+apply from: "${rootDir}/configs/dependencies.gradle"
+apply from: "${rootDir}/configs/android.gradle"
 
 android {
     compileSdk versions.compileSdk
 
     defaultConfig {
-        minSdk versions.minSdk
-        targetSdk versions.targetSdk
-
         applicationId "github.nisrulz.projectqreader"
         versionCode versions.appVersionCode
         versionName versions.appVersionName
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     buildFeatures {
@@ -44,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Support
     implementation androidX
 
