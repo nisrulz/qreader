@@ -20,11 +20,11 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdk versions.compileSdk
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
 
         applicationId "github.nisrulz.projectqreader"
         versionCode versions.appVersionCode
@@ -36,16 +36,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    lintOptions {
-        textOutput "stdout"
-        textReport true
-        checkAllWarnings true
-        warningsAsErrors true
-        showAll true
-        explainIssues true
-        abortOnError false
     }
 }
 

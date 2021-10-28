@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
+
+// Replace nisrulz with <your_github_username>
+final group = "com.github.nisrulz"
+final artifact = "qreader"
+final versionCode = 13
+final versionName = "2.2.0"
+
+android {
+    defaultConfig {
+        // define version
+        buildConfigField 'int', 'VERSION_CODE', "${versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${versionName}\""
+    }
+}
+
+
 ext {
     libConfig = [
             versionCode     : 13,

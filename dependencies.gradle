@@ -36,7 +36,6 @@ ext {
 
 
     visionDeps = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
-    kotlin = [stdLib: "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"]
 
 
     lifecycle = [

@@ -19,11 +19,11 @@ apply from: '../dependencies.gradle'
 //apply from: '../libconfig.gradle'
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdk versions.compileSdk
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
 
         consumerProguardFiles 'consumer-proguard-rules.pro'
     }
@@ -32,16 +32,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    lintOptions {
-        textOutput "stdout"
-        textReport true
-        checkAllWarnings true
-        warningsAsErrors true
-        showAll true
-        explainIssues true
-        abortOnError false
     }
 }
 
