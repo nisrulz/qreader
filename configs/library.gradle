@@ -14,4 +14,24 @@
  * limitations under the License.
  */
 
-apply from: "${rootDir}/configs/library.gradle"
+// To publish to the local maven repository on your machine (~/.m2/repository),
+// run: ./gradlew publishToMavenLocal
+apply plugin: "com.vanniktech.maven.publish"
+
+final versionCode = 13
+final versionName = "2.2.0"
+
+android {
+    defaultConfig {
+        // define version
+        buildConfigField 'int', 'VERSION_CODE', "${versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${versionName}\""
+
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+}
+
+dependencies {
+    implementation androidXDeps.annotation
+    api visionDeps
+}

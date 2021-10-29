@@ -64,9 +64,6 @@ release.properties
 # Ignore Gradle GUI config
 gradle-app.setting
 
-# Properties
-gradle.properties
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

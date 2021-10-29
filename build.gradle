@@ -15,11 +15,10 @@
  */
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     // Gradle will not find vars defined in an external file when referring to them
     // in the buildscript block, unless you link it from the buildscript block, too.
-    apply from: 'dependencies.gradle'
+    apply from: "${rootDir}/configs/dependencies.gradle"
 
     repositories {
         google()
@@ -31,13 +30,5 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+apply from: "${rootDir}/configs/all_projects.gradle"

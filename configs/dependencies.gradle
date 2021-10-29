@@ -1,0 +1,50 @@
+/*
+ * Copyright (C) 2016 Nishant Srivastava
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ext {
+    versions = [
+        appVersionCode  : 2,
+        appVersionName  : '1.0.1',
+
+        minSdk          : 21,
+        targetSdk       : 31,
+        compileSdk      : 31,
+
+        appcompat       : '1.0.2',
+        annotation      : '1.2.0',
+        lifeycle_runtime: '2.3.1',
+
+        vision          : '21.0.0',
+
+    ]
+
+    visionDeps = "com.google.firebase:firebase-ml-vision:$versions.vision"
+
+    androidXDeps = [
+        appcompat        : "androidx.appcompat:appcompat:$versions.appcompat",
+        annotation       : "androidx.annotation:annotation:$versions.annotation",
+        lifecycle_runtime: "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifeycle_runtime"
+    ]
+
+    gradlePlug = [
+        android     : "com.android.tools.build:gradle:7.0.3",
+        kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31",
+        nexus_plugin: "com.vanniktech:gradle-maven-publish-plugin:0.18.0",
+    ]
+
+    gradlePlugins = gradlePlug.values()
+    androidX = androidXDeps.values()
+}

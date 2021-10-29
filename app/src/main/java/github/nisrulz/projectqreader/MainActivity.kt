@@ -148,13 +148,13 @@ class MainActivity : AppCompatActivity() {
 
     internal fun readQRCodeFromDrawable(resID: Int) {
         qrEader = QREader.Builder(this, object : QRDataListener {
-            override fun onDetected(data: String) {
+            override fun onDetected(data: String?) {
                 Log.d("QREader", "Value : $data")
                 binding.txtQrCodeInfo.post { binding.txtQrCodeInfo.text = data }
             }
 
-            override fun onReadQrError(exception: Exception) {
-                Toast.makeText(this@MainActivity, exception.localizedMessage, Toast.LENGTH_LONG)
+            override fun onReadQrError(exception: Exception?) {
+                Toast.makeText(this@MainActivity, exception?.localizedMessage, Toast.LENGTH_LONG)
                     .show()
             }
         }).build()
@@ -167,12 +167,12 @@ class MainActivity : AppCompatActivity() {
         // Init QREader
         // ------------
         qrEader = QREader.Builder(this, object : QRDataListener {
-            override fun onDetected(data: String) {
+            override fun onDetected(data: String?) {
                 Log.d("QREader", "Value : $data")
                 binding.txtQrCodeInfo.post { binding.txtQrCodeInfo.text = data }
             }
 
-            override fun onReadQrError(exception: Exception) {
+            override fun onReadQrError(exception: Exception?) {
                 Toast.makeText(this@MainActivity, "Cannot open camera", Toast.LENGTH_LONG).show()
 
             }
