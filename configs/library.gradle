@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// To publish to the local maven repository on your machine (~/.m2/repository),
+// run: ./gradlew publishToMavenLocal
 apply plugin: "com.vanniktech.maven.publish"
 
 final versionCode = 13
