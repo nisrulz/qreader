@@ -1,0 +1,19 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    switch (project.name) {
+        case "app": apply plugin: 'com.android.application'; break
+        default: apply plugin: 'com.android.library'; break
+    }
+    apply plugin: 'kotlin-android'
+
+    android {
+        compileSdk versions.compileSdk
+    }
+
+    apply from: "${rootDir}/configs/dependencies.gradle"
+    apply from: "${rootDir}/configs/android.gradle"
+}

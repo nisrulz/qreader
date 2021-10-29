@@ -31,7 +31,7 @@ ext {
 
     ]
 
-    visionDeps = [vision: "com.google.firebase:firebase-ml-vision:$versions.vision"]
+    visionDeps = "com.google.firebase:firebase-ml-vision:$versions.vision"
 
     androidXDeps = [
         appcompat        : "androidx.appcompat:appcompat:$versions.appcompat",
@@ -47,5 +47,4 @@ ext {
 
     gradlePlugins = gradlePlug.values()
     androidX = androidXDeps.values()
-    vision = visionDeps.values()
 }

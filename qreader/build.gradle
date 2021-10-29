@@ -14,20 +14,4 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
-// Apply common configs
-apply from: "${rootDir}/configs/dependencies.gradle"
-apply from: "${rootDir}/configs/android.gradle"
 apply from: "${rootDir}/configs/library.gradle"
-
-android {
-    compileSdk versions.compileSdk
-}
-
-dependencies {
-    implementation androidXDeps.annotation
-    api vision
-}

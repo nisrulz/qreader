@@ -14,18 +14,7 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
-
-// Apply common configs
-apply from: "${rootDir}/configs/dependencies.gradle"
-apply from: "${rootDir}/configs/android.gradle"
-
 android {
-    compileSdk versions.compileSdk
-
     defaultConfig {
         applicationId "github.nisrulz.projectqreader"
         versionCode versions.appVersionCode
